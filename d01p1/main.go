@@ -1,4 +1,4 @@
-// Package main solves AoC 2021 Day 1.
+// Package main solves day 1, part 1.
 package main
 
 import (
