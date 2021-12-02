@@ -1,0 +1,15 @@
+// Package main runs the puzzle with the sample input.
+package main
+
+import (
+    "log"
+
+    "github.com/amsibamsi/aoc21"
+    "github.com/amsibamsi/aoc21/{{.Package}}"
+)
+
+func main() {
+    if err := aoc21.RunSolve({{.Package}}.Solve); err != nil {
+        log.Fatal(err)
+    }
+}
