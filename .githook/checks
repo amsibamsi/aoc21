@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# To be linked from .git/hooks/pre-commit.
+
+set -xe
+
+golangci-lint run ./...
+go test ./...
