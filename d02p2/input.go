@@ -1,3 +1,4 @@
+// This file was generated with go:generate.
 package d02p2
 
 // Input is the sample input for the puzzle.

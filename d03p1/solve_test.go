@@ -1,3 +1,4 @@
+// This file was generated with go:generate.
 package d03p1
 
 import (

@@ -1,4 +1,6 @@
 // Package main runs the puzzle with the sample input.
+//
+// This file was generated with go:generate.
 package main
 
 import (
