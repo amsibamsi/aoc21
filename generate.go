@@ -1,11 +1,11 @@
 package aoc21
 
 import (
-	"html/template"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
+	"text/template"
 )
 
 // GenFile generates a output file by executing the referenced
