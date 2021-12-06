@@ -3,11 +3,13 @@ package d05p1
 import (
 	"strconv"
 	"strings"
+
+	"github.com/amsibamsi/aoc21"
 )
 
-func Solve(lines []string) (string, error) {
+func Solve(input string) (string, error) {
 	d := diagram{}
-	for _, line := range lines {
+	for _, line := range aoc21.ToLines(input) {
 		points := strings.Split(line, " -> ")
 		p0, err := parseInts(strings.Split(points[0], ","))
 		if err != nil {

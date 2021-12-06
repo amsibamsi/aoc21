@@ -5,9 +5,9 @@ import (
 	"strings"
 )
 
-func Solve(lines []string) (string, error) {
+func Solve(input string) (string, error) {
 	pop := [9]int{}
-	for _, num := range strings.Split(lines[0], ",") {
+	for _, num := range strings.Split(strings.Trim(input, "\n"), ",") {
 		n, err := strconv.Atoi(num)
 		if err != nil {
 			return "", err

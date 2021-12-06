@@ -5,9 +5,9 @@ import (
 	"testing"
 )
 
-func TestSolve(t *testing.T, solver func(lines []string) (string, error), input, output string) {
+func TestSolve(t *testing.T, solver func(input string) (string, error), input, output string) {
 	want := strings.Trim(output, "\n")
-	got, err := solver(ToLines(input))
+	got, err := solver(input)
 	if err == nil {
 		if got != want {
 			t.Errorf("Got %q, want %q", got, want)

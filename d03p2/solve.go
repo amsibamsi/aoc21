@@ -2,9 +2,12 @@ package d03p2
 
 import (
 	"strconv"
+
+	"github.com/amsibamsi/aoc21"
 )
 
-func Solve(lines []string) (string, error) {
+func Solve(input string) (string, error) {
+	lines := aoc21.ToLines(input)
 	numLines := len(lines)
 	numBits := len(lines[0])
 	candidates := make([]string, numLines)

@@ -4,9 +4,12 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+
+	"github.com/amsibamsi/aoc21"
 )
 
-func Solve(lines []string) (string, error) {
+func Solve(input string) (string, error) {
+	lines := aoc21.ToLines(input)
 	draws := strings.Split(lines[0], ",")
 	boardSrc := strings.Join(lines[2:], "\n")
 	var boards []*board

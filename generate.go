@@ -19,7 +19,7 @@ import (
 // BUG: This will likely produce incorrect results if any string value
 // in the inventory contains backticks and is inserted as-is in the
 // template in between backticks.
-func GenFile(baseDir, dataFilename, outputFilename, tmplPath string) error {
+func GenFile(baseDir, outputFilename, tmplPath, dataFilename string, overwrite bool) error {
 	var data []byte
 	if dataFilename != "" {
 		dataFile, err := os.Open(filepath.Join(baseDir, dataFilename))
@@ -35,7 +35,15 @@ func GenFile(baseDir, dataFilename, outputFilename, tmplPath string) error {
 	if err := os.MkdirAll(filepath.Dir(filepath.Join(baseDir, outputFilename)), 0777); err != nil {
 		return err
 	}
-	outputFile, err := os.Create(filepath.Join(baseDir, outputFilename))
+	flags := os.O_RDWR | os.O_CREATE | os.O_TRUNC
+	if !overwrite {
+		flags |= os.O_EXCL
+	}
+	outputFile, err := os.OpenFile(
+		filepath.Join(baseDir, outputFilename),
+		flags,
+		0666,
+	)
 	if err != nil {
 		return err
 	}
