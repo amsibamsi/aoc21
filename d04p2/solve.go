@@ -4,16 +4,13 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
-
-	"github.com/amsibamsi/aoc21"
 )
 
 func Solve(input string) (string, error) {
-	lines := aoc21.ToLines(input)
-	draws := strings.Split(lines[0], ",")
-	boardSrc := strings.Join(lines[2:], "\n")
+	parts := strings.SplitN(input, "\n\n", 2)
+	draws := strings.Split(parts[0], ",")
 	var boards []*board
-	for _, b := range strings.Split(boardSrc, "\n\n") {
+	for _, b := range strings.Split(parts[1], "\n\n") {
 		boards = append(boards, newBoard(b))
 	}
 	var lastDraw string
