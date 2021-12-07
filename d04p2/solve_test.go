@@ -2,11 +2,11 @@
 package d04p2
 
 import (
-    "testing"
+	"testing"
 
-    "github.com/amsibamsi/aoc21"
+	"github.com/amsibamsi/aoc21"
 )
 
 func TestSolve(t *testing.T) {
-    aoc21.TestSolve(t, Solve, Input, Output)
+	aoc21.TestSolve(t, Solve, Input, Output)
 }

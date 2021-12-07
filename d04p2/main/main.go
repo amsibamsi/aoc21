@@ -4,14 +4,14 @@
 package main
 
 import (
-    "log"
+	"log"
 
-    "github.com/amsibamsi/aoc21"
-    "github.com/amsibamsi/aoc21/d04p2"
+	"github.com/amsibamsi/aoc21"
+	"github.com/amsibamsi/aoc21/d04p2"
 )
 
 func main() {
-    if err := aoc21.RunSolve(d04p2.Solve); err != nil {
-        log.Fatal(err)
-    }
+	if err := aoc21.RunSolve(d04p2.Solve); err != nil {
+		log.Fatal(err)
+	}
 }
