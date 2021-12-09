@@ -1,0 +1,78 @@
+Number of segments to digit:
+
+1:
+2: 1
+3: 7
+4: 4
+5: 2,3,5
+6: 0,6,9
+7: 8
+
+
+Segment to digits it appears in:
+
+a: 0,2,3,5,6,7,8,9
+b: 0,4,5,6,8,9
+c: 0,1,2,3,4,7,8,9
+d: 2,3,4,5,6,8,9
+e: 0,2,6,7
+f: 0,1,3,4,5,6,7,8,9
+g: 0,2,3,5,6,8,9
+
+
+Digit to segments:
+
+0: abcefg
+1: cf
+2: acdeg
+3: acdfg
+4: bcdf
+5: abdfg
+6: abdefg
+7: acf
+8: abcdefg
+9: abcdfg
+
+
+Number of segments to missing segments:
+
+5: bcef
+6: cde
+
+
+Number of segments to possible segments:
+
+2: cf
+3: acf
+4: bcdf
+
+
+Example:
+
+acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf
+
+Possible wire to segment mappings:
+
+a: acf,cf,bcdf -> cf
+b: acf,cf,bcdf -> cf
+c: -acf,-cf,-bcdf -> eg
+d: acf,-cf,-bcdf -> a
+e: -acf,-cf,bcdf -> bd
+f: -acf,-cf,bcdf -> bd
+g: -acf,-cf,-bcdf -> eg
+
+a: acf,bcdf,cf -> cf
+b: acf,bcdf,cf -> cf
+c: bdeg,aeg,abdeg -> eg
+d: acf,aeg,abdeg -> a
+e: bdeg,bcdf,abdeg -> bd
+f: bdeg,bcdf,abdeg -> bd
+g: bdeg,aeg,abdeg -> eg
+
+a: bcef,acf,cde,bcdf,cf -> c
+b: bcef,acf,bcdf,cf -> cf
+c: -acf,-bcdf,-cf -> eg
+d: acf,-bcdf,bcef,-cf -> a
+e: bcef,-acf,bcdf,-cf -> b
+f: -acf,cde,bcdf,-cf -> d
+g: bcef,-acf,-bcdf,-cf -> e
