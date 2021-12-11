@@ -2,4 +2,5 @@
 package d11p2
 
 // Output is the sample output for the puzzle.
-const Output = `42`
+const Output = `517
+`
