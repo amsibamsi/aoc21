@@ -25,7 +25,7 @@ var (
 		{"output.txt", "output.txt.tmpl", "", false},
 		{"solve.go", "solve.go.tmpl", "", false},
 		{"main/main.go", "main.go.tmpl", "", true},
-		{"solve_test.go", "solve_test.go.tmpl", "", true},
+		{"solve_test.go", "solve_test.go.tmpl", "", false},
 		{"doc.go", "doc.go.tmpl", "", true},
 		{"input.go", "input.go.tmpl", "input.txt", true},
 		{"output.go", "output.go.tmpl", "output.txt", true},
