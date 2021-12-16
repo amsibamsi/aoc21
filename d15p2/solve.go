@@ -7,8 +7,6 @@ import (
 	"github.com/amsibamsi/aoc21"
 )
 
-// TODO: Terribly slow, ~400s on single core. But hey, memory usage is
-// awesome!
 func Solve(input string) (string, error) {
 	levels := map[[2]int]int{}
 	lines := aoc21.ToLines(input)
@@ -31,29 +29,34 @@ func Solve(input string) (string, error) {
 	end := [2]int{5*width - 1, 5*height - 1}
 	risks := map[[2]int]int{}
 	max := math.MaxInt
-	search([2]int{0, 0}, end, levels, risks, 0, &max)
-	return strconv.Itoa(risks[end]), nil
-}
-
-func search(p, end [2]int, levels map[[2]int]int, risks map[[2]int]int, risk int, max *int) {
-	if _, ok := levels[p]; !ok {
-		return
-	}
-	if risk >= *max {
-		return
-	}
-	if r, ok := risks[p]; ok && risk >= r {
-		return
-	}
-	risks[p] = risk
-	if p == end {
-		if risk < *max {
-			*max = risk
+	search := [][2]int{{0, 0}}
+	for len(search) > 0 {
+		p := search[0]
+		search = search[1:]
+		for _, d := range [][2]int{{1, 0}, {0, 1}, {-1, 0}, {0, -1}} {
+			next := [2]int{p[0] + d[0], p[1] + d[1]}
+			risk := risks[p] + levels[next]
+			if next == p {
+				continue
+			}
+			if _, ok := levels[next]; !ok {
+				continue
+			}
+			if risk >= max {
+				continue
+			}
+			if r, ok := risks[next]; ok && risk >= r {
+				continue
+			}
+			risks[next] = risk
+			if next == end {
+				if risk < max {
+					max = risk
+				}
+				continue
+			}
+			search = append(search, next)
 		}
-		return
 	}
-	for _, d := range [][2]int{{1, 0}, {0, 1}, {-1, 0}, {0, -1}} {
-		next := [2]int{p[0] + d[0], p[1] + d[1]}
-		search(next, end, levels, risks, risk+levels[next], max)
-	}
+	return strconv.Itoa(risks[end]), nil
 }
