@@ -1,6 +1,7 @@
 package d15p2
 
 import (
+	"container/heap"
 	"math"
 	"strconv"
 
@@ -26,37 +27,78 @@ func Solve(input string) (string, error) {
 			}
 		}
 	}
+	start := [2]int{0, 0}
 	end := [2]int{5*width - 1, 5*height - 1}
 	risks := map[[2]int]int{}
 	max := math.MaxInt
-	search := [][2]int{{0, 0}}
-	for len(search) > 0 {
-		p := search[0]
-		search = search[1:]
+	nodes := newGraph()
+	heap.Push(nodes, &node{start, -levels[start]})
+	for n := heap.Pop(nodes).(*node); n != nil; n = heap.Pop(nodes).(*node) {
+		if _, ok := levels[n.pos]; !ok {
+			continue
+		}
+		risk := n.risk + levels[n.pos]
+		if risk >= max {
+			continue
+		}
+		if r, ok := risks[n.pos]; ok && risk >= r {
+			continue
+		}
+		risks[n.pos] = risk
+		if n.pos == end {
+			if risk < max {
+				max = risk
+			}
+			continue
+		}
 		for _, d := range [][2]int{{1, 0}, {0, 1}, {-1, 0}, {0, -1}} {
-			next := [2]int{p[0] + d[0], p[1] + d[1]}
-			risk := risks[p] + levels[next]
-			if next == p {
+			next := [2]int{n.pos[0] + d[0], n.pos[1] + d[1]}
+			if next == n.pos {
 				continue
 			}
-			if _, ok := levels[next]; !ok {
-				continue
-			}
-			if risk >= max {
-				continue
-			}
-			if r, ok := risks[next]; ok && risk >= r {
-				continue
-			}
-			risks[next] = risk
-			if next == end {
-				if risk < max {
-					max = risk
-				}
-				continue
-			}
-			search = append(search, next)
+			heap.Push(nodes, &node{next, risk})
 		}
 	}
 	return strconv.Itoa(risks[end]), nil
+}
+
+type node struct {
+	pos  [2]int
+	risk int
+}
+
+type graph struct {
+	data []*node
+}
+
+func newGraph() *graph {
+	return &graph{[]*node{}}
+}
+
+func (g *graph) Len() int {
+	return len(g.data)
+}
+
+func (g *graph) Less(i, j int) bool {
+	return g.data[i].risk < g.data[j].risk
+}
+
+func (g *graph) Swap(i, j int) {
+	if len(g.data) == 0 {
+		return
+	}
+	g.data[i], g.data[j] = g.data[j], g.data[i]
+}
+
+func (g *graph) Push(n interface{}) {
+	g.data = append(g.data, n.(*node))
+}
+
+func (g *graph) Pop() interface{} {
+	if len(g.data) == 0 {
+		return (*node)(nil)
+	}
+	p := g.data[len(g.data)-1]
+	g.data = g.data[:len(g.data)-1]
+	return p
 }
